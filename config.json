@@ -1,0 +1,32 @@
+{
+    "tokenizers": {
+      "expert1": "microsoft/Phi-3-medium-128k-instruct",
+      "expert2": "gorilla-llm/gorilla-openfunctions-v2",
+      "expert3": "ise-uiuc/Magicoder-S-DS-6.7B",
+      "expert4": "defog/llama-3-sqlcoder-8b",
+      "expert5": "VAGOsolutions/Llama-3-SauerkrautLM-8b-Instruct"
+    },
+    "models": {
+      "expert1": "microsoft/Phi-3-medium-128k-instruct",
+      "expert2": "gorilla-llm/gorilla-openfunctions-v2",
+      "expert3": "ise-uiuc/Magicoder-S-DS-6.7B",
+      "expert4": "defog/llama-3-sqlcoder-8b",
+      "expert5": "VAGOsolutions/Llama-3-SauerkrautLM-8b-Instruct"
+    },
+    "quantization": {
+      "expert1": null,
+      "expert2": null,
+      "expert3": null,
+      "expert4": null,
+      "expert5": null
+    },
+    "class_indices": {
+      "LABEL_0": 0,
+      "LABEL_1": 1,
+      "LABEL_2": 2,
+      "LABEL_3": 3,
+      "LABEL_4": 4
+    },
+    "router": "cognitivecomputations/Kraken_experiment01",
+    "model_type": "kraken"
+}
