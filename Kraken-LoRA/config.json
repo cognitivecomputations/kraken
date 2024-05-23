@@ -1,0 +1,31 @@
+{
+  "tokenizers": {
+    "lora_expert1": "Llama-3-Smaug-8B-adapter",
+    "lora_expert2": "Meta-Llama-3-8B-Instruct-function-calling-json-mode-adapter",
+    "lora_expert3": "Llama-3-8B-Instruct-Coder-adapter",
+    "lora_expert4": "llama-3-sqlcoder-8b-adapter",
+    "lora_expert5": "Llama-3-SauerkrautLM-8b-Instruct-adapter"
+  },
+  "models": {
+    "base": "meta-llama/Meta-Llama-3-8B-Instruct"
+  },
+  "lora_adapters": {
+    "lora_expert1": "Llama-3-Smaug-8B-adapter",
+    "lora_expert2": "Meta-Llama-3-8B-Instruct-function-calling-json-mode-adapter",
+    "lora_expert3": "Llama-3-8B-Instruct-Coder-adapter",
+    "lora_expert4": "llama-3-sqlcoder-8b-adapter",
+    "lora_expert5": "Llama-3-SauerkrautLM-8b-Instruct-adapter"
+  },
+  "quantization": {
+    "base": null
+  },
+  "class_indices": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_2": 2,
+    "LABEL_3": 3,
+    "LABEL_4": 4
+  },
+  "router": "../kraken/kraken_router",
+  "model_type": "kraken"
+}
