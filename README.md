@@ -21,7 +21,9 @@ torch 2.2+
 
 ## How to Use
 
-(Optional) 0. Run the jupyter notebook kraken_train_router.ipynb to train a router that will be imported later as a our router on the Kraken CoE Architecture
+(Optional) I. Run the jupyter notebook kraken_prepare_trainingdata to prepare data based on your usecase datasets
+
+(Optional) II. Run the jupyter notebook kraken_train_router.ipynb to train a router that will be imported later as a our router on the Kraken CoE Architecture
 
 
 1. Run the kraken_lm_save.ipynb that will load a router (could be the one you have trained in step 0.) and sets up a model following the Kraken CoE Architecture, according to the config.json.
