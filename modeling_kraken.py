@@ -40,11 +40,6 @@ class KrakenForCausalLM(PreTrainedModel):
         model_decision_index = self.models_indices[prediction]
         model_keys = ['expert1', 'expert2', 'expert3', 'expert4','expert5']
         return model_keys[model_decision_index]
-    
-    def expert_tokenizer(self, text):
-        model_key = self.determine_model(text)
-        return self.tokenizers[model_key]
-
 
     def generate(self, input_ids, **generate_kwargs):
         # Tokenize the input_ids
@@ -75,8 +70,16 @@ class KrakenForCausalLM(PreTrainedModel):
         tok_input_ids = tok.input_ids.to(current_device)  
         tok_attention_mask = tok.attention_mask.to(current_device)
 
-        # Generate text using the retrieved model
-        return model.generate(tok_input_ids, attention_mask=tok_attention_mask, **generate_kwargs)
+        # Generate text using the modified model
+        output_ids = model.generate(tok_input_ids, attention_mask=tok_attention_mask, **generate_kwargs)
+
+        # Decode the output using the expert tokenizer
+        decoded_text = self.tokenizers[model_key].decode(output_ids[0], skip_special_tokens=True)
+
+        # Retokenize the decoded text using the base tokenizer for external compatibility
+        retokenized_ids = self.tokenizer(decoded_text, return_tensors="pt").input_ids.to(current_device)
+        
+        return retokenized_ids
     
 
       
