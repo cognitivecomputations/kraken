@@ -43,10 +43,6 @@ class KrakenForCausalLM(PreTrainedModel):
         adapter_keys = ['lora_expert1', 'lora_expert2', 'lora_expert3', 'lora_expert4', 'lora_expert5']
         return adapter_keys[model_decision_index]
 
-    def expert_tokenizer(self, text):
-        adapter_key = self.determine_adapter(text)
-        return self.tokenizers[adapter_key]
-
 
     def generate(self, input_ids, **generate_kwargs):
         # Tokenize the input_ids
@@ -74,13 +70,19 @@ class KrakenForCausalLM(PreTrainedModel):
         current_device = input_ids.device if isinstance(input_ids, torch.Tensor) else 'cpu'
         
         # Tokenize accordingly to the best model
-
         tok = self.tokenizers[adapter_key](mod_txt, return_tensors="pt")
         tok_input_ids = tok.input_ids.to(current_device)
         tok_attention_mask = tok.attention_mask.to(current_device)
 
         # Generate text using the modified model
-        return model_with_lora.generate(tok_input_ids, attention_mask=tok_attention_mask, **generate_kwargs)
+        output_ids = model_with_lora.generate(tok_input_ids, attention_mask=tok_attention_mask, **generate_kwargs)
+
+        # Decode the output using the expert tokenizer
+        decoded_text = self.tokenizers[adapter_key].decode(output_ids[0], skip_special_tokens=True)
+
+        # Retokenize the decoded text using the base tokenizer for external compatibility
+        retokenized_ids = self.tokenizer(decoded_text, return_tensors="pt").input_ids.to(current_device)
+        return retokenized_ids
     
 
       
